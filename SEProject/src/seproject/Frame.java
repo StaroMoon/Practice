@@ -44,6 +44,8 @@ public class Frame extends javax.swing.JFrame {
     FileOutputStream fop = null;
     Scanner sc;
     File start = new File("save.txt");
+    private static String OS = System.getProperty("os.name").toLowerCase();
+    
     public Frame() {
         initComponents();
         this.setTitle("Finance manager V." + VERSION);
@@ -72,7 +74,6 @@ public class Frame extends javax.swing.JFrame {
                 pst = con.prepareStatement("select * from Overview");
                 rs = pst.executeQuery();
                 jTable1.setModel(DbUtils.resultSetToTableModel(rs));
-            
                 update_Table_Employee();
             }
         }catch(Exception e){
@@ -237,23 +238,23 @@ public class Frame extends javax.swing.JFrame {
         addPic = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jToolBar1 = new javax.swing.JToolBar();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        NewTool = new javax.swing.JButton();
+        OpenTool = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
-        jButton8 = new javax.swing.JButton();
+        pdftool = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
-        jButton3 = new javax.swing.JButton();
+        ExitTool = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        NewMenu = new javax.swing.JMenuItem();
         jSeparator4 = new javax.swing.JPopupMenu.Separator();
-        Load = new javax.swing.JMenuItem();
+        OpenMenu = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        PdfMenu = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        CloseMenu = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        Help = new javax.swing.JMenuItem();
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1034,105 +1035,105 @@ public class Frame extends javax.swing.JFrame {
 
         jToolBar1.setRollover(true);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/New_file.png"))); // NOI18N
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        NewTool.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/New_file.png"))); // NOI18N
+        NewTool.setFocusable(false);
+        NewTool.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        NewTool.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        NewTool.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                NewToolActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton2);
+        jToolBar1.add(NewTool);
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Open_icon.png"))); // NOI18N
-        jButton4.setFocusable(false);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        OpenTool.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Open_icon.png"))); // NOI18N
+        OpenTool.setFocusable(false);
+        OpenTool.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        OpenTool.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        OpenTool.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                OpenToolActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton4);
+        jToolBar1.add(OpenTool);
         jToolBar1.add(jSeparator5);
 
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Pdf_icon.png"))); // NOI18N
-        jButton8.setFocusable(false);
-        jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton8.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        pdftool.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Pdf_icon.png"))); // NOI18N
+        pdftool.setFocusable(false);
+        pdftool.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        pdftool.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        pdftool.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                pdftoolActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton8);
+        jToolBar1.add(pdftool);
         jToolBar1.add(jSeparator2);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Exit_icon.png"))); // NOI18N
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        ExitTool.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Exit_icon.png"))); // NOI18N
+        ExitTool.setFocusable(false);
+        ExitTool.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ExitTool.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        ExitTool.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                ExitToolActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton3);
+        jToolBar1.add(ExitTool);
 
         jMenu1.setText("File");
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem1.setText("New File");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        NewMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
+        NewMenu.setText("New File");
+        NewMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                NewMenuActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(NewMenu);
         jMenu1.add(jSeparator4);
 
-        Load.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
-        Load.setText("Open File");
-        Load.addActionListener(new java.awt.event.ActionListener() {
+        OpenMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        OpenMenu.setText("Open File");
+        OpenMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoadActionPerformed(evt);
+                OpenMenuActionPerformed(evt);
             }
         });
-        jMenu1.add(Load);
+        jMenu1.add(OpenMenu);
         jMenu1.add(jSeparator1);
 
-        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem4.setText("Export as Pdf");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        PdfMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        PdfMenu.setText("Export as Pdf");
+        PdfMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                PdfMenuActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem4);
+        jMenu1.add(PdfMenu);
         jMenu1.add(jSeparator3);
 
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
-        jMenuItem2.setText("close");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        CloseMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
+        CloseMenu.setText("close");
+        CloseMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                CloseMenuActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenu1.add(CloseMenu);
 
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Help");
 
-        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem3.setText("Help file");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        Help.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
+        Help.setText("Help file");
+        Help.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                HelpActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem3);
+        jMenu2.add(Help);
 
         jMenuBar1.add(jMenu2);
 
@@ -1182,7 +1183,7 @@ public class Frame extends javax.swing.JFrame {
                     update_Table_Overview();
                     JOptionPane.showMessageDialog(null, "Added.");
                 } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(null, "RefID can't be the same number.","",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage(),"",JOptionPane.ERROR_MESSAGE);
                 }finally{
                     try {
                         pst.close();
@@ -1216,12 +1217,12 @@ public class Frame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void ExitToolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitToolActionPerformed
         int p = JOptionPane.showConfirmDialog(null, "Do you want to exit?","Exit",JOptionPane.YES_NO_OPTION);
         if(p==0){
             this.dispose();
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_ExitToolActionPerformed
 
     private void RemoveOverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveOverActionPerformed
         if(WorkDir.getText().equals("")){
@@ -1590,7 +1591,7 @@ public class Frame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTable2KeyReleased
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void pdftoolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pdftoolActionPerformed
         if(Income.getText().equals("") && Expenses.getText().equals("") && Balance.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Balance doesn't calculate.");
         }else{
@@ -1599,7 +1600,11 @@ public class Frame extends javax.swing.JFrame {
                 if(x != null && x.length() > 0){
                     int row = jTable1.getRowCount();
                     Document document = new Document();
-                    PdfWriter.getInstance(document,new FileOutputStream("Report\\" + x + ".pdf"));
+                    if(OS.indexOf("win") >= 0){
+                        PdfWriter.getInstance(document,new FileOutputStream("Report\\" + x + ".pdf"));
+                    }else if(OS.indexOf("mac") >= 0){
+                        PdfWriter.getInstance(document,new FileOutputStream("Report/" + x + ".pdf"));
+                    }
                     document.open();
                     Paragraph ph = new Paragraph("Telecom fiber 2009 Limited partnership \n "
                             + "25/6 Village No.5, Suwannasorn Road, \n"
@@ -1679,16 +1684,16 @@ public class Frame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, ex);
             }
         }
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_pdftoolActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void CloseMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseMenuActionPerformed
         int p = JOptionPane.showConfirmDialog(null, "Do you want to exit?","Exit",JOptionPane.YES_NO_OPTION);
         if(p==0){
             this.dispose();
         }
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_CloseMenuActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void PdfMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PdfMenuActionPerformed
         if(Income.getText().equals("") && Expenses.getText().equals("") && Balance.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Balance doesn't calculate.");
         }else{
@@ -1697,7 +1702,11 @@ public class Frame extends javax.swing.JFrame {
                 if(x != null && x.length() > 0){
                     int row = jTable1.getRowCount();
                     Document document = new Document();
-                    PdfWriter.getInstance(document,new FileOutputStream("Report\\" + x + ".pdf"));
+                    if(OS.indexOf("win") >= 0){
+                        PdfWriter.getInstance(document,new FileOutputStream("Report\\" + x + ".pdf"));
+                    }else if(OS.indexOf("mac") >= 0){
+                        PdfWriter.getInstance(document,new FileOutputStream("Report/" + x + ".pdf"));
+                    }
                     document.open();
                     Paragraph ph = new Paragraph("Telecom fiber 2009 Limited partnership \n "
                             + "25/6 Village No.5, Suwannasorn Road, \n"
@@ -1787,14 +1796,15 @@ public class Frame extends javax.swing.JFrame {
         }catch(PrinterException ex){
             System.err.format("Cannot print %s%n", ex.getMessage());
         }*/
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_PdfMenuActionPerformed
 
-    private void LoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadActionPerformed
+    private void OpenMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpenMenuActionPerformed
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         File f = chooser.getSelectedFile();
         filename = f.getAbsolutePath();
         if(filename.substring(filename.length()-7).equals(".sqlite")){
+            if(OS.indexOf("win") >= 0){
             String[] s = filename.split("\\\\");
                 for(int i = 0;i<s.length;i++){
                     name += s[i];
@@ -1804,6 +1814,18 @@ public class Frame extends javax.swing.JFrame {
                 }
             name2 = name;
             WorkDir.setText(filename);
+            }else if(OS.indexOf("mac") >= 0){
+                String[] s = filename.split("/");
+                    for(int i = 0;i<s.length;i++){
+                        name += s[i];
+                        if(i<s.length-1){
+                            name += "//";
+                        }
+                    }
+            name2 = name;
+            WorkDir.setText(filename);
+            }
+        
             
             try {
                 File file = new File("save.txt");
@@ -1829,14 +1851,22 @@ public class Frame extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null, "Invalid file to open. Only file \".sqlite\" are allow.","Wrong file type",JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_LoadActionPerformed
+    }//GEN-LAST:event_OpenMenuActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void NewMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewMenuActionPerformed
         try {
             String s = JOptionPane.showInputDialog(null, "Insert your file name", "Insert file name", JOptionPane.INFORMATION_MESSAGE);
             if (s != null && s.length() > 0){
                 JOptionPane.showMessageDialog(null, "The file has been saved in folder \"DB\". \nYou must open file before use the program. (File -> Open File)");
-                File dbFile = new File("DB\\" + s + ".sqlite");
+                File dbFile;
+                if(OS.indexOf("win") >= 0){
+                    dbFile = new File("DB\\" + s + ".sqlite");
+                }else if(OS.indexOf("mac") >= 0){
+                    dbFile = new File("DB/" + s + ".sqlite");
+                }else{
+                    dbFile = new File("DB\\" + s + ".sqlite");
+                }
+                
                 dbFile.delete();
 
                 SqlJetDb db = SqlJetDb.open(dbFile, true);
@@ -1863,18 +1893,39 @@ public class Frame extends javax.swing.JFrame {
         }catch (Exception ex) {
             
         }
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_NewMenuActionPerformed
     
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void HelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HelpActionPerformed
         try{
             File f = new File("Readme.txt");
             filename = f.getAbsolutePath();
-            String[] s = filename.split("\\\\");
-            String n = "";
-            for(int i = 0;i<s.length;i++){
-                n += s[i];
-                if(i<s.length-1){
-                    n += "\\\\";
+            String n;
+            if(OS.indexOf("win") >= 0){
+                String[] s = filename.split("\\\\");
+                n = "";
+                for(int i = 0;i<s.length;i++){
+                    n += s[i];
+                    if(i<s.length-1){
+                        n += "\\\\";
+                    }
+                }
+            }else if(OS.indexOf("mac") >= 0){
+                String[] s = filename.split("/");
+                n = "";
+                for(int i = 0;i<s.length;i++){
+                    n += s[i];
+                    if(i<s.length-1){
+                        n += "//";
+                    }
+                }
+            }else{
+                String[] s = filename.split("\\\\");
+                n = "";
+                for(int i = 0;i<s.length;i++){
+                    n += s[i];
+                    if(i<s.length-1){
+                        n += "\\\\";
+                    }
                 }
             }
             if(!f.exists()){
@@ -1884,7 +1935,7 @@ public class Frame extends javax.swing.JFrame {
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error!! cannot find \"Readme.txt\".");
         }
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_HelpActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         EmpIDField.setText("");
@@ -1949,12 +2000,19 @@ public class Frame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ClearOverMousePressed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void NewToolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewToolActionPerformed
         try {
             String s = JOptionPane.showInputDialog(null, "Insert your file name", "Insert file name", JOptionPane.INFORMATION_MESSAGE);
             if (s != null && s.length() > 0){
                 JOptionPane.showMessageDialog(null, "The file has been saved in folder \"DB\". \nYou must open file before use the program. (File -> Open File)");
-                File dbFile = new File("DB\\" + s + ".sqlite");
+                File dbFile;
+                if(OS.indexOf("win") >=0){
+                    dbFile = new File("DB\\" + s + ".sqlite");
+                }else if(OS.indexOf("mac") >=0){
+                    dbFile = new File("DB/" + s + ".sqlite");
+                }else{
+                    dbFile = new File("DB\\" + s + ".sqlite");
+                }
                 dbFile.delete();
 
                 SqlJetDb db = SqlJetDb.open(dbFile, true);
@@ -1981,14 +2039,15 @@ public class Frame extends javax.swing.JFrame {
         }catch (Exception ex) {
             
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_NewToolActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void OpenToolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpenToolActionPerformed
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         File f = chooser.getSelectedFile();
         filename = f.getAbsolutePath();
         if(filename.substring(filename.length()-7).equals(".sqlite")){
+            if(OS.indexOf("win") >= 0){
             String[] s = filename.split("\\\\");
                 for(int i = 0;i<s.length;i++){
                     name += s[i];
@@ -1996,8 +2055,20 @@ public class Frame extends javax.swing.JFrame {
                         name += "\\\\";
                     }
                 }
-            name2 = name;
-            WorkDir.setText(filename);
+        name2 = name;
+        WorkDir.setText(filename);
+        }else if(OS.indexOf("mac") >= 0){
+            String[] s = filename.split("/");
+                for(int i = 0;i<s.length;i++){
+                    name += s[i];
+                    if(i<s.length-1){
+                        name += "//";
+                    }
+                }
+        name2 = name;
+        WorkDir.setText(filename);
+        }
+        
             
             try {
                 File file = new File("save.txt");
@@ -2023,7 +2094,7 @@ public class Frame extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null, "Invalid file to open. Only file \".sqlite\" are allow.","Wrong file type",JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_OpenToolActionPerformed
            
     private String age(String x){
         int a = Integer.parseInt(x.substring(0,4));
@@ -2100,6 +2171,7 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JButton CalButton;
     private javax.swing.JButton CalOver;
     private javax.swing.JButton ClearOver;
+    private javax.swing.JMenuItem CloseMenu;
     private com.toedter.calendar.JDateChooser DateField;
     private javax.swing.JButton DelEm;
     private javax.swing.JTextArea DescripField;
@@ -2108,18 +2180,24 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JTextField EmailField;
     private javax.swing.JTextArea EmpField;
     private javax.swing.JTextField EmpIDField;
+    private javax.swing.JButton ExitTool;
     private javax.swing.JLabel Expenses;
+    private javax.swing.JMenuItem Help;
     private com.toedter.calendar.JDateChooser HireDate;
     private javax.swing.JTextField HomeNOField;
     private javax.swing.JTextField HoursField;
     private javax.swing.JLabel Income;
     private javax.swing.JLabel LabalBal;
-    private javax.swing.JMenuItem Load;
     private javax.swing.JTextField MobileNOField;
     private javax.swing.JComboBox MoneyBox;
     private javax.swing.JTextField NameField;
+    private javax.swing.JMenuItem NewMenu;
+    private javax.swing.JButton NewTool;
     private javax.swing.JTextField OTHourField;
     private javax.swing.JTextField OTRateField;
+    private javax.swing.JMenuItem OpenMenu;
+    private javax.swing.JButton OpenTool;
+    private javax.swing.JMenuItem PdfMenu;
     private javax.swing.JLabel Picture;
     private javax.swing.JTextField PosField;
     private javax.swing.JTextField RefField;
@@ -2131,10 +2209,6 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JLabel WorkDir;
     private javax.swing.JButton addPic;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2169,10 +2243,6 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -2196,5 +2266,6 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JButton pdftool;
     // End of variables declaration//GEN-END:variables
 }

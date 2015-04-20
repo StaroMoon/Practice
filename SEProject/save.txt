@@ -1,2 +1,1 @@
-C:\\Users\\StaroMoon\\Documents\\GitHub\\Practice\\SEProject\\123.sqlite
-C:\Users\StaroMoon\Documents\GitHub\Practice\SEProject\123.sqlite
+/Users/staromoon/Git/Practice/SEProject/DB/หฟกหกฟ.sqlite

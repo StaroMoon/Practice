@@ -44,7 +44,6 @@ public class Frame extends javax.swing.JFrame {
     FileOutputStream fop = null;
     Scanner sc;
     File start = new File("save.txt");
-    private static String OS = System.getProperty("os.name").toLowerCase();
     
     public Frame() {
         initComponents();
@@ -52,6 +51,7 @@ public class Frame extends javax.swing.JFrame {
         this.getContentPane().setBackground(Color.WHITE);
         this.setResizable(false);
         employeePath();
+        update_Table_Overview();
         if(start.exists()){
             update_Table_Overview();
         }else{
@@ -66,18 +66,17 @@ public class Frame extends javax.swing.JFrame {
         try{
             sc = new Scanner(start);
             String fi = sc.next();
-            String fi2 = sc.next();
-            WorkDir.setText(fi2);
-            if(start.exists()){
+            WorkDir.setText(fi);
+            //if(start.exists()){
                 Class.forName("org.sqlite.JDBC");
                 con = DriverManager.getConnection("jdbc:sqlite:" + fi);
                 pst = con.prepareStatement("select * from Overview");
                 rs = pst.executeQuery();
                 jTable1.setModel(DbUtils.resultSetToTableModel(rs));
                 update_Table_Employee();
-            }
+            //}
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
         }finally{
             try {
                 pst.close();
@@ -281,8 +280,6 @@ public class Frame extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 650));
-
-        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -601,7 +598,7 @@ public class Frame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(RemoveOver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ClearOver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(ClearOver, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE))
                         .addGap(44, 44, 44)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -839,6 +836,7 @@ public class Frame extends javax.swing.JFrame {
         jLabel18.setText("Salary :");
 
         HireDate.setBackground(new java.awt.Color(255, 255, 255));
+        HireDate.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -992,7 +990,7 @@ public class Frame extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(18, 18, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 445, Short.MAX_VALUE)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(AddEm, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(35, 35, 35)
@@ -1151,7 +1149,7 @@ public class Frame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 625, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1395,7 +1393,7 @@ public class Frame extends javax.swing.JFrame {
                 update_Table_Employee();
                 JOptionPane.showMessageDialog(null, "Added.");
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "EmployeeID can't be the same.","",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, ex.getMessage(),"",JOptionPane.ERROR_MESSAGE);
             }finally{
                 try {
                     pst.close();
@@ -1600,11 +1598,8 @@ public class Frame extends javax.swing.JFrame {
                 if(x != null && x.length() > 0){
                     int row = jTable1.getRowCount();
                     Document document = new Document();
-                    if(OS.indexOf("win") >= 0){
-                        PdfWriter.getInstance(document,new FileOutputStream("Report\\" + x + ".pdf"));
-                    }else if(OS.indexOf("mac") >= 0){
-                        PdfWriter.getInstance(document,new FileOutputStream("Report/" + x + ".pdf"));
-                    }
+                    PdfWriter.getInstance(document,new FileOutputStream("Report/" + x + ".pdf"));
+                    
                     document.open();
                     Paragraph ph = new Paragraph("Telecom fiber 2009 Limited partnership \n "
                             + "25/6 Village No.5, Suwannasorn Road, \n"
@@ -1702,11 +1697,8 @@ public class Frame extends javax.swing.JFrame {
                 if(x != null && x.length() > 0){
                     int row = jTable1.getRowCount();
                     Document document = new Document();
-                    if(OS.indexOf("win") >= 0){
-                        PdfWriter.getInstance(document,new FileOutputStream("Report\\" + x + ".pdf"));
-                    }else if(OS.indexOf("mac") >= 0){
-                        PdfWriter.getInstance(document,new FileOutputStream("Report/" + x + ".pdf"));
-                    }
+                    PdfWriter.getInstance(document,new FileOutputStream("Report/" + x + ".pdf"));
+                    
                     document.open();
                     Paragraph ph = new Paragraph("Telecom fiber 2009 Limited partnership \n "
                             + "25/6 Village No.5, Suwannasorn Road, \n"
@@ -1804,29 +1796,7 @@ public class Frame extends javax.swing.JFrame {
         File f = chooser.getSelectedFile();
         filename = f.getAbsolutePath();
         if(filename.substring(filename.length()-7).equals(".sqlite")){
-            if(OS.indexOf("win") >= 0){
-            String[] s = filename.split("\\\\");
-                for(int i = 0;i<s.length;i++){
-                    name += s[i];
-                    if(i<s.length-1){
-                        name += "\\\\";
-                    }
-                }
-            name2 = name;
             WorkDir.setText(filename);
-            }else if(OS.indexOf("mac") >= 0){
-                String[] s = filename.split("/");
-                    for(int i = 0;i<s.length;i++){
-                        name += s[i];
-                        if(i<s.length-1){
-                            name += "//";
-                        }
-                    }
-            name2 = name;
-            WorkDir.setText(filename);
-            }
-        
-            
             try {
                 File file = new File("save.txt");
                 fop = new FileOutputStream(file);
@@ -1834,19 +1804,14 @@ public class Frame extends javax.swing.JFrame {
                     file.createNewFile();
                 }
                 String o = "\n";
-                byte[] content = name.getBytes();
-                byte[] content2 = filename.getBytes();
-                byte[] content3 = o.getBytes();
+                byte[] content = filename.getBytes();
                 fop.write(content);
-                fop.write(content3);
-                fop.write(content2);
                 fop.flush();
                 fop.close();
             } catch (Exception ex) {
 
             }
             update_Table_Overview();
-            name = "";
             filename = "";
         }else{
             JOptionPane.showMessageDialog(null, "Invalid file to open. Only file \".sqlite\" are allow.","Wrong file type",JOptionPane.ERROR_MESSAGE);
@@ -1858,14 +1823,7 @@ public class Frame extends javax.swing.JFrame {
             String s = JOptionPane.showInputDialog(null, "Insert your file name", "Insert file name", JOptionPane.INFORMATION_MESSAGE);
             if (s != null && s.length() > 0){
                 JOptionPane.showMessageDialog(null, "The file has been saved in folder \"DB\". \nYou must open file before use the program. (File -> Open File)");
-                File dbFile;
-                if(OS.indexOf("win") >= 0){
-                    dbFile = new File("DB\\" + s + ".sqlite");
-                }else if(OS.indexOf("mac") >= 0){
-                    dbFile = new File("DB/" + s + ".sqlite");
-                }else{
-                    dbFile = new File("DB\\" + s + ".sqlite");
-                }
+                File dbFile = new File("DB/" + s + ".sqlite");
                 
                 dbFile.delete();
 
@@ -1899,39 +1857,11 @@ public class Frame extends javax.swing.JFrame {
         try{
             File f = new File("Readme.txt");
             filename = f.getAbsolutePath();
-            String n;
-            if(OS.indexOf("win") >= 0){
-                String[] s = filename.split("\\\\");
-                n = "";
-                for(int i = 0;i<s.length;i++){
-                    n += s[i];
-                    if(i<s.length-1){
-                        n += "\\\\";
-                    }
-                }
-            }else if(OS.indexOf("mac") >= 0){
-                String[] s = filename.split("/");
-                n = "";
-                for(int i = 0;i<s.length;i++){
-                    n += s[i];
-                    if(i<s.length-1){
-                        n += "//";
-                    }
-                }
-            }else{
-                String[] s = filename.split("\\\\");
-                n = "";
-                for(int i = 0;i<s.length;i++){
-                    n += s[i];
-                    if(i<s.length-1){
-                        n += "\\\\";
-                    }
-                }
-            }
+            
             if(!f.exists()){
                 JOptionPane.showMessageDialog(null, "Error!! cannot find file Help.");
             }
-            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler "+n);
+            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler "+filename);
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error!! cannot find \"Readme.txt\".");
         }
@@ -2005,14 +1935,7 @@ public class Frame extends javax.swing.JFrame {
             String s = JOptionPane.showInputDialog(null, "Insert your file name", "Insert file name", JOptionPane.INFORMATION_MESSAGE);
             if (s != null && s.length() > 0){
                 JOptionPane.showMessageDialog(null, "The file has been saved in folder \"DB\". \nYou must open file before use the program. (File -> Open File)");
-                File dbFile;
-                if(OS.indexOf("win") >=0){
-                    dbFile = new File("DB\\" + s + ".sqlite");
-                }else if(OS.indexOf("mac") >=0){
-                    dbFile = new File("DB/" + s + ".sqlite");
-                }else{
-                    dbFile = new File("DB\\" + s + ".sqlite");
-                }
+                File dbFile = new File("DB/" + s + ".sqlite");
                 dbFile.delete();
 
                 SqlJetDb db = SqlJetDb.open(dbFile, true);
@@ -2047,29 +1970,7 @@ public class Frame extends javax.swing.JFrame {
         File f = chooser.getSelectedFile();
         filename = f.getAbsolutePath();
         if(filename.substring(filename.length()-7).equals(".sqlite")){
-            if(OS.indexOf("win") >= 0){
-            String[] s = filename.split("\\\\");
-                for(int i = 0;i<s.length;i++){
-                    name += s[i];
-                    if(i<s.length-1){
-                        name += "\\\\";
-                    }
-                }
-        name2 = name;
-        WorkDir.setText(filename);
-        }else if(OS.indexOf("mac") >= 0){
-            String[] s = filename.split("/");
-                for(int i = 0;i<s.length;i++){
-                    name += s[i];
-                    if(i<s.length-1){
-                        name += "//";
-                    }
-                }
-        name2 = name;
-        WorkDir.setText(filename);
-        }
-        
-            
+            WorkDir.setText(filename);
             try {
                 File file = new File("save.txt");
                 fop = new FileOutputStream(file);
@@ -2077,19 +1978,14 @@ public class Frame extends javax.swing.JFrame {
                     file.createNewFile();
                 }
                 String o = "\n";
-                byte[] content = name.getBytes();
-                byte[] content2 = filename.getBytes();
-                byte[] content3 = o.getBytes();
+                byte[] content = filename.getBytes();
                 fop.write(content);
-                fop.write(content3);
-                fop.write(content2);
                 fop.flush();
                 fop.close();
             } catch (Exception ex) {
 
             }
             update_Table_Overview();
-            name = "";
             filename = "";
         }else{
             JOptionPane.showMessageDialog(null, "Invalid file to open. Only file \".sqlite\" are allow.","Wrong file type",JOptionPane.ERROR_MESSAGE);
@@ -2112,15 +2008,8 @@ public class Frame extends javax.swing.JFrame {
             return "";
         }else{
             filename = ff.getAbsolutePath();
-            String[] s = filename.split("\\\\");
-            for(int i = 0;i<s.length;i++){
-            nameEm += s[i];
-                if(i<s.length-1){
-                    nameEm += "\\\\";
-                }
-            }
-            emPath = nameEm;
-            name = "";
+            emPath = filename;
+            System.out.println(emPath);
             return emPath;
         }
     }
